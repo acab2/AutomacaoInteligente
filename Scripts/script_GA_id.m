@@ -5,10 +5,10 @@
 %diretamente dando 2 cliques no data.mat
 
 % Limpar workspace
-clc;
-clear all;
+%clc;
+%clear all;
 
-global entrada saida tsaida
+global entrada saida tsaida ger
 
 % Carregar dados
 %data = load('data.mat');
@@ -33,6 +33,8 @@ lim_sup = [1000 1000 1000]; %Limite superior
 tam = length(lim_sup);
 options = optimoptions('ga','CrossoverFraction', taxaMutacao,'Display', 'off','FunctionTolerance', limErro,'MaxGenerations', nGeracoes*tam,'PopulationSize', nIndividuos);
 
+ger = 0;
+
 % Utilizando GA Toolbox
 [ind,erro,~,output] = ga(@identificacao,tam,[],[],[],[],lim_inf,lim_sup,[],options);
 
@@ -54,25 +56,33 @@ xlabel('Tempo ','FontSize', 16)
 ylabel('Saida','FontSize', 16)
 legend('Real','Estimado')
 
+% Salvar melhor individuo
 
 % Função de aptidão
 function erro = identificacao(ind)
     
-    global entrada saida tsaida
-
+    global entrada saida tsaida ger
+    ger
+    
     % Declaração das funções de tranferência
     G1 = tf(1, [1, ind(1)]);
     G2 = tf(1, [1, ind(2)]);
     G3 = tf(1, [1, ind(3)]);
     
     % Definição do diagrama de blocos usando Control System Toolbox
-	XY = lft(G1,G2);
-	XYZ = lft(XY,G3);
+    YZ = lft(G2,G3);
+	XYZ = append(G1, G2, G3);
 	
     % Simular
-	saidaSimulada = lsim(XYZ, entrada, tsaida); 
+    saidaSimulada = lsim(XYZ, entrada, tsaida); 
 	
-    % Computar erro
-    erro = (sum((saidaSimulada-saida).^2))^(1/2);
+    sub = saidaSimulada-saida;
+    pow = sub.^2;
+    soma = sum(pow);
+    raiz = soma.^(1/2);
+    erro = sum(raiz);
     
+    % Computar erro
+    %erro = (sum((saidaSimulada-saida).^2))^(1/2);
+    ger = ger+1;
 end
