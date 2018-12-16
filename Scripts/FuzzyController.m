@@ -25,64 +25,64 @@ Fuzzy = mamfis('Name','FuzzyController');
 %para adicionar as distribuições ao controlador
 
 %Input 1 = erroX 
-Fuzzy = addvar(Fuzzy,'input','ErroX',[-300 300]);
-Fuzzy = addmf(Fuzzy,'input',1,'NB','trapmf',[-300 -300 -225 -150]);
-Fuzzy = addmf(Fuzzy,'input',1,'NM','trimf',[-225 -150 -75]);
-Fuzzy = addmf(Fuzzy,'input',1,'NS','trimf',[-150 -75 0]);
-Fuzzy = addmf(Fuzzy,'input',1,'ZE','trimf',[-75 0 75]);
-Fuzzy = addmf(Fuzzy,'input',1,'PS','trimf',[0 75 150]);
-Fuzzy = addmf(Fuzzy,'input',1,'PM','trimf',[75 150 225]);
-Fuzzy = addmf(Fuzzy,'input',1,'PB','trapmf',[150 225 300 300]);
+Fuzzy = addInput(Fuzzy,[-300 300],'Name',"ErroX");
+Fuzzy = addMF(Fuzzy,"ErroX","trapmf",[-300 -300 -225 -150],'Name',"NB");
+Fuzzy = addMF(Fuzzy,"ErroX","trimf",[-225 -150 -75],'Name',"NM");
+Fuzzy = addMF(Fuzzy,"ErroX","trimf",[-150 -75 0],'Name',"NS");
+Fuzzy = addMF(Fuzzy,"ErroX","trimf",[-75 0 75],'Name',"ZE");
+Fuzzy = addMF(Fuzzy,"ErroX","trimf",[0 75 150],'Name',"PS");
+Fuzzy = addMF(Fuzzy,"ErroX","trimf",[75 150 225],'Name',"PM");
+Fuzzy = addMF(Fuzzy,"ErroX","trapmf",[150 225 300 300],'Name',"PB");
 
 %Input 2 = erroY
-Fuzzy = addvar(Fuzzy,'input','ErroY',[-300 300]);
-Fuzzy = addmf(Fuzzy,'input',2,'NB','trapmf',[-300 -300 -225 -150]);
-Fuzzy = addmf(Fuzzy,'input',2,'NM','trimf',[-225 -150 -75]);
-Fuzzy = addmf(Fuzzy,'input',2,'NS','trimf',[-150 -75 0]);
-Fuzzy = addmf(Fuzzy,'input',2,'ZE','trimf',[-75 0 75]);
-Fuzzy = addmf(Fuzzy,'input',2,'PS','trimf',[0 75 150]);
-Fuzzy = addmf(Fuzzy,'input',2,'PM','trimf',[75 150 225]);
-Fuzzy = addmf(Fuzzy,'input',2,'PB','trapmf',[150 225 300 300]);
+Fuzzy = addInput(Fuzzy,[-300 300],'Name',"ErroY");
+Fuzzy = addMF(Fuzzy,"ErroY","trapmf",[-300 -300 -225 -150],'Name',"NB");
+Fuzzy = addMF(Fuzzy,"ErroY","trimf",[-225 -150 -75],'Name',"NM");
+Fuzzy = addMF(Fuzzy,"ErroY","trimf",[-150 -75 0],'Name',"NS");
+Fuzzy = addMF(Fuzzy,"ErroY","trimf",[-75 0 75],'Name',"ZE");
+Fuzzy = addMF(Fuzzy,"ErroY","trimf",[0 75 150],'Name',"PS");
+Fuzzy = addMF(Fuzzy,"ErroY","trimf",[75 150 225],'Name',"PM");
+Fuzzy = addMF(Fuzzy,"ErroY","trapmf",[150 225 300 300],'Name',"PB");
 
 %Input 3 = erroZ
-Fuzzy = addvar(Fuzzy,'input','ErroZ',[0 2000]);
-Fuzzy = addmf(Fuzzy,'input',3,'NB','trapmf',[0 0 800 900]);
-Fuzzy = addmf(Fuzzy,'input',3,'NM','trimf',[800 900 1000]);
-Fuzzy = addmf(Fuzzy,'input',3,'NS','trimf',[900 1000 1100]);
-Fuzzy = addmf(Fuzzy,'input',3,'ZE','trimf',[1000 1100 1200]);
-Fuzzy = addmf(Fuzzy,'input',3,'PS','trimf',[1100 1200 1300]);
-Fuzzy = addmf(Fuzzy,'input',3,'PM','trimf',[1200 1300 1400]);
-Fuzzy = addmf(Fuzzy,'input',3,'PB','trapmf',[1300 1400 2000 2000]);
+Fuzzy = addInput(Fuzzy,[0 2000],'Name',"ErroZ");
+Fuzzy = addMF(Fuzzy,"ErroZ","trapmf",[0 0 800 900],'Name',"NB");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[800 900 1000],'Name',"NM");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[900 1000 1100],'Name',"NS");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[1000 1100 1200],'Name',"ZE");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[1100 1200 1300],'Name',"PS");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[1200 1300 1400],'Name',"PM");
+Fuzzy = addMF(Fuzzy,"ErroZ","trapmf",[1300 1400 2000 2000],'Name',"PB");
 
 %Output 1 = Servo 2
-Fuzzy = addvar(Fuzzy,'output','Servo2',[195 820]);
-Fuzzy = addmf(Fuzzy,'output',1,'NB','trapmf',[195 195 273 351]);
-Fuzzy = addmf(Fuzzy,'output',1,'NM','trimf',[273 351 429]);
-Fuzzy = addmf(Fuzzy,'output',1,'NS','trimf',[351 429 507]);
-Fuzzy = addmf(Fuzzy,'output',1,'ZE','trimf',[429 507 585]);
-Fuzzy = addmf(Fuzzy,'output',1,'PS','trimf',[507 585 663]);
-Fuzzy = addmf(Fuzzy,'output',1,'PM','trimf',[585 663 741]);
-Fuzzy = addmf(Fuzzy,'output',1,'PB','trapmf',[663 741 820 820]);
+Fuzzy = addOutput(Fuzzy,[195 820],'Name',"Servo2");
+Fuzzy = addMF(Fuzzy,"Servo2","trapmf",[195 195 273 351],'Name',"NB");
+Fuzzy = addMF(Fuzzy,"Servo2","trimf",[273 351 429],'Name',"NM");
+Fuzzy = addMF(Fuzzy,"Servo2","trimf",[351 429 507],'Name',"NS");
+Fuzzy = addMF(Fuzzy,"Servo2","trimf",[429 507 585],'Name',"ZE");
+Fuzzy = addMF(Fuzzy,"Servo2","trimf",[507 585 663],'Name',"PS");
+Fuzzy = addMF(Fuzzy,"Servo2","trimf",[585 663 741],'Name',"PM");
+Fuzzy = addMF(Fuzzy,"Servo2","trapmf",[663 741 820 820],'Name',"PB");
 
 %Output Y = Servo 3
-Fuzzy = addvar(Fuzzy,'output','Servo3',[512, 930]);
-Fuzzy = addmf(Fuzzy,'output',2,'NB','trapmf',[512 512 564 616]);
-Fuzzy = addmf(Fuzzy,'output',2,'NM','trimf',[564 616 668]);
-Fuzzy = addmf(Fuzzy,'output',2,'NS','trimf',[616 668 720]);
-Fuzzy = addmf(Fuzzy,'output',2,'ZE','trimf',[668 720 772]);
-Fuzzy = addmf(Fuzzy,'output',2,'PS','trimf',[720 772 824]);
-Fuzzy = addmf(Fuzzy,'output',2,'PM','trimf',[772 824 876]);
-Fuzzy = addmf(Fuzzy,'output',2,'PB','trapmf',[824 876 930 930]);
+Fuzzy = addOutput(Fuzzy,[512, 930],'Name',"Servo3");
+Fuzzy = addMF(Fuzzy,"Servo3","trapmf",[512 512 564 616],'Name',"NB");
+Fuzzy = addMF(Fuzzy,"Servo3","trimf",[564 616 668],'Name',"NM");
+Fuzzy = addMF(Fuzzy,"Servo3","trimf",[616 668 720],'Name',"NS");
+Fuzzy = addMF(Fuzzy,"Servo3","trimf",[668 720 772],'Name',"ZE");
+Fuzzy = addMF(Fuzzy,"Servo3","trimf",[720 772 824],'Name',"PS");
+Fuzzy = addMF(Fuzzy,"Servo3","trimf",[772 824 876],'Name',"PM");
+Fuzzy = addMF(Fuzzy,"Servo3","trapmf",[824 876 930 930],'Name',"PB");
 
 %Output Z = Servo 4
-Fuzzy = addvar(Fuzzy,'output','Servo4',[512 885]);
-Fuzzy = addmf(Fuzzy,'output',3,'NB','trapmf',[512 512 558 604]);
-Fuzzy = addmf(Fuzzy,'output',3,'NM','trimf',[558 604 650]);
-Fuzzy = addmf(Fuzzy,'output',3,'NS','trimf',[604 650 696]);
-Fuzzy = addmf(Fuzzy,'output',3,'ZE','trimf',[650 696 742]);
-Fuzzy = addmf(Fuzzy,'output',3,'PS','trimf',[696 742 788]);
-Fuzzy = addmf(Fuzzy,'output',3,'PM','trimf',[742 788 834]);
-Fuzzy = addmf(Fuzzy,'output',3,'PB','trapmf',[788 834 885 885]);
+Fuzzy = addOutput(Fuzzy,[512 885],'Name',"Servo4");
+Fuzzy = addMF(Fuzzy,"Servo4","trapmf",[512 512 558 604],'Name',"NB");
+Fuzzy = addMF(Fuzzy,"Servo4","trimf",[558 604 650],'Name',"NM");
+Fuzzy = addMF(Fuzzy,"Servo4","trimf",[604 650 696],'Name',"NS");
+Fuzzy = addMF(Fuzzy,"Servo4","trimf",[650 696 742],'Name',"ZE");
+Fuzzy = addMF(Fuzzy,"Servo4","trimf",[696 742 788],'Name',"PS");
+Fuzzy = addMF(Fuzzy,"Servo4","trimf",[742 788 834],'Name',"PM");
+Fuzzy = addMF(Fuzzy,"Servo4","trapmf",[788 834 885 885],'Name',"PB");
 
 figure(1)
 subplot(3,1,1),plotmf(Fuzzy,'output',1);
@@ -101,7 +101,7 @@ load("uniqueRules.txt");
 Fuzzy = addRule(Fuzzy,uniqueRules);
 %plotfis(Fuzzy)
 
-%save Fuzzy;
+save Fuzzy;
 
 %evalfis = params SistemaFuzzy e vetor com os Antecedentes
 %Retorna os Consequentes.
