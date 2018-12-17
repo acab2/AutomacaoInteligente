@@ -1,9 +1,6 @@
 % Script para identificação do modelo utilizando algoritmos genéticos
 % utilizando GA toolbox
 
-%OBS: load('data.mat') tá gerando estrutura errada. Carregar data
-%diretamente dando 2 cliques no data.mat
-
 % Iniciar paralelização da CPU
 %parpool(4);
 
@@ -25,7 +22,8 @@ saidaZ = data(1:nExemplos,3);
 tStop = nExemplos/10; % Tempo de simulação
 entrada = [servo2 servo3 servo4];
 saida = [saidaX saidaY saidaZ];
-tsaida = 0:0.1:tStop-0.1; 
+tsaida = 0:0.1:tStop-0.1;
+ger = 0;
 
 % Configuração do GA
 nGeracoes = 400;
@@ -37,8 +35,6 @@ lim_sup = [1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000 1000
 tam = length(lim_sup);
 options = optimoptions('ga','CrossoverFraction', taxaCruzamento,'Display', 'off','FunctionTolerance', limErro,'MaxGenerations', nGeracoes*tam,'PopulationSize', nIndividuos);
 
-ger = 0;
-
 % Executar AG usando GA Toolbox
 [ind,erro,~,output] = ga(@identificacao,tam,[],[],[],[],lim_inf,lim_sup,[],options);
 
@@ -47,11 +43,12 @@ ger = 0;
 G1 = tf(1, [1, ind(1), ind(2), ind(3), ind(4), ind(5)]);
 G2 = tf(1, [1, ind(6), ind(7), ind(8), ind(9), ind(10)]);
 G3 = tf(1, [1, ind(11), ind(12), ind(13), ind(14), ind(15)]);
+
 % Definição do diagrama de blocos usando Control System Toolbox
-%X = G1;
-%Y = G2;
-%Z = G3;
-XYZ = append(G1, G2, G3);
+Syst2 = [G2 G2;G2 G2];
+Syst3 = [G3 G3;G3 G3];
+YZ = lft(Syst2,Syst3,1,1);
+XYZ = append(G1, YZ);
     
 % Simular sistema com coeficientes do individuo mais apto
 saidaSimulada = lsim(XYZ,entrada,tsaida);
@@ -88,7 +85,7 @@ save apto.mat ind
 function erro = identificacao(ind)
     
     global entrada saida tsaida ger
-    ger
+    %ger
     
     % Declaração das funções de tranferência
     G1 = tf(1, [1, ind(1), ind(2), ind(3), ind(4), ind(5)]);
@@ -96,22 +93,20 @@ function erro = identificacao(ind)
     G3 = tf(1, [1, ind(11), ind(12), ind(13), ind(14), ind(15)]);
     
     % Definição do diagrama de blocos usando Control System Toolbox
-    %YZ = lft(G2,G3, 1, 1);
-    %X = G1;
-    %Y = G2;
-    %Z = G3;
-    XYZ = append(G1, G2, G3);
+    Syst2 = [G2 G2;G2 G2];
+    Syst3 = [G3 G3;G3 G3];
+    YZ = lft(Syst2,Syst3,1,1);
+    XYZ = append(G1, YZ);
 	
     % Simular
     saidaSimulada = lsim(XYZ, entrada, tsaida); 
 	
+    % Computar erro
     sub = saidaSimulada-saida;
     pow = sub.^2;
     soma = sum(pow);
     raiz = soma.^(1/2);
     erro = sum(raiz);
-    
-    % Computar erro
-    %erro = sum((sum((saidaSimulada-saida).^2))^(1/2));
-    ger = ger+1;
+   
+    %ger = ger+1;
 end
