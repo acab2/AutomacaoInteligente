@@ -1,3 +1,5 @@
+function x = FuzzyController()
+
 %% Controlador Fuzzy usando Fuzzy Logic Toolbox
 
 clc
@@ -131,4 +133,4 @@ save Fuzzy;
 %grid
 
 
-
+end
