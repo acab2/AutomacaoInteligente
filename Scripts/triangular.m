@@ -1,4 +1,4 @@
-function vetorPos = triangular(stat1, stat2, stereoParams)
+function [vetorPos,success] = triangular(stat1, stat2, stereoParams)
 
 %
 % function stat = minhaTriangulacao(stat1, stat2)
@@ -18,13 +18,15 @@ function vetorPos = triangular(stat1, stat2, stereoParams)
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%
 vetorPos = zeros(1,3);
+success=0;
 % As duas câmeras detectaram o ponto?
 if ~isempty(stat1) && ~isempty(stat2) && ~isempty(stereoParams)
     tol = max(stat1.EquivDiameter, stat2.EquivDiameter);
     % É uma distância válida?
-    if stat1.Centroid - stat2.Centroid < tol
+    if stat1.Centroid - stat2.Centroid < tol*10
         %triangulação: descobrir a distancia com a calibração anterior.
-            vetorPos = triangulate(stat1.Centroid, stat2.Centroid, stereoParams);
+        success=1;
+        vetorPos = triangulate(stat1.Centroid, stat2.Centroid, stereoParams);
     else
         warning("Não foi possivel triangular com segurança: " + ...
         "Possivelmente não são o mesmo ponto! Verifique seus parâmetros");

@@ -48,13 +48,13 @@ Fuzzy = addMF(Fuzzy,"ErroY","trapmf",[150 225 300 300],'Name',"PB");
 
 %Input 3 = erroZ
 Fuzzy = addInput(Fuzzy,[0 2000],'Name',"ErroZ");
-Fuzzy = addMF(Fuzzy,"ErroZ","trapmf",[0 0 800 900],'Name',"NB");
-Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[800 900 1000],'Name',"NM");
-Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[900 1000 1100],'Name',"NS");
-Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[1000 1100 1200],'Name',"ZE");
-Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[1100 1200 1300],'Name',"PS");
-Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[1200 1300 1400],'Name',"PM");
-Fuzzy = addMF(Fuzzy,"ErroZ","trapmf",[1300 1400 2000 2000],'Name',"PB");
+Fuzzy = addMF(Fuzzy,"ErroZ","trapmf",[0 0 800 900],'Name',"VS");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[800 900 1000],'Name',"S");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[900 1000 1100],'Name',"LS");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[1000 1100 1200],'Name',"M");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[1100 1200 1300],'Name',"LB");
+Fuzzy = addMF(Fuzzy,"ErroZ","trimf",[1200 1300 1400],'Name',"B");
+Fuzzy = addMF(Fuzzy,"ErroZ","trapmf",[1300 1400 2000 2000],'Name',"VB");
 
 %Output 1 = Servo 2
 Fuzzy = addOutput(Fuzzy,[195 820],'Name',"Servo2");
@@ -102,6 +102,8 @@ subplot(6,1,3),plotmf(Fuzzy,'input',3);
 load("uniqueRules.txt");
 Fuzzy = addRule(Fuzzy,uniqueRules);
 %plotfis(Fuzzy)
+
+x = Fuzzy;
 
 save Fuzzy;
 
